@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1890ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#096dd9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#bg)"/>
+  <!-- 水滴 -->
+  <path d="M22 40 C22 40 14 28 14 22 C14 17.6 17.6 14 22 14 C26.4 14 30 17.6 30 22 C30 28 22 40 22 40 Z" fill="#40a9ff" opacity="0.9"/>
+  <!-- 闪电 -->
+  <path d="M36 14 L30 30 L36 30 L32 46 L48 28 L40 28 L44 14 Z" fill="#faad14" opacity="0.9"/>
+  <!-- 扳手 -->
+  <g transform="translate(40,36) rotate(35)" opacity="0.8">
+    <rect x="-1.5" y="0" width="3" height="12" rx="1.5" fill="#fff"/>
+    <circle cx="0" cy="0" r="4" fill="none" stroke="#fff" stroke-width="2"/>
+  </g>
+</svg>
