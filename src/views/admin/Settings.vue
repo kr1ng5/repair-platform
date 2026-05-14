@@ -117,6 +117,7 @@ import { message } from 'ant-design-vue'
 import { PlusOutlined } from '@ant-design/icons-vue'
 import dayjs from 'dayjs'
 import { adminApi, scheduleApi } from '../../api/mock'
+import { storage } from '../../utils/storage'
 
 const activeTab = ref('profile')
 const savingProfile = ref(false)
@@ -161,7 +162,23 @@ const handleSaveProfile = async () => {
   savingProfile.value = true
   try {
     const res = await adminApi.updateSettings({ ...profile })
-    if (res.code === 200) message.success('保存成功')
+    if (res.code === 200) {
+      // 同步更新 admins 列表和 current_admin 中的姓名、电话
+      const currentAdmin = storage.get('current_admin')
+      if (currentAdmin) {
+        const admins = storage.get('admins') || []
+        const index = admins.findIndex(a => a.id === currentAdmin.id)
+        if (index !== -1) {
+          admins[index].name = profile.worker_name
+          admins[index].phone = profile.worker_phone
+          storage.set('admins', admins)
+          currentAdmin.name = profile.worker_name
+          currentAdmin.phone = profile.worker_phone
+          storage.set('current_admin', currentAdmin)
+        }
+      }
+      message.success('保存成功')
+    }
   } finally {
     savingProfile.value = false
   }

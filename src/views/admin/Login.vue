@@ -39,12 +39,6 @@
         </a-form-item>
       </a-form>
 
-      <div class="login-footer">
-        <a-divider>测试账号</a-divider>
-        <p>管理员：admin / admin123</p>
-        <p>维修工：dad / 123456</p>
-      </div>
-
       <div class="back-link">
         <router-link to="/home">← 返回用户端</router-link>
       </div>
@@ -116,17 +110,6 @@ const handleLogin = async () => {
 .login-header p {
   color: #666;
   font-size: 14px;
-}
-
-.login-footer {
-  margin-top: 24px;
-  text-align: center;
-}
-
-.login-footer p {
-  color: #666;
-  font-size: 13px;
-  margin-bottom: 4px;
 }
 
 .back-link {

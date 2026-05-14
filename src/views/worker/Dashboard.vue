@@ -119,8 +119,8 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, reactive, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { message } from 'ant-design-vue'
 import { ToolOutlined, LogoutOutlined } from '@ant-design/icons-vue'
 import { adminApi } from '../../api/mock'
@@ -199,6 +199,11 @@ onMounted(() => {
   if (!worker.value || worker.value.role !== 'worker') {
     router.push('/admin/login')
     return
+  }
+  // 从 settings 同步最新的维修工姓名
+  const settings = storage.get('settings')
+  if (settings?.worker_name) {
+    worker.value = { ...worker.value, name: settings.worker_name }
   }
   loadOrders()
   loadStats()

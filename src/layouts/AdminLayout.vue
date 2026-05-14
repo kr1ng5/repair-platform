@@ -94,7 +94,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { message } from 'ant-design-vue'
 import {
@@ -133,7 +133,19 @@ const currentTitle = computed(() => {
   return '工作台'
 })
 
-onMounted(() => { admin.value = storage.get('current_admin') })
+const loadAdmin = () => {
+  const current = storage.get('current_admin')
+  const settings = storage.get('settings')
+  if (current && settings?.worker_name) {
+    admin.value = { ...current, name: settings.worker_name }
+  } else {
+    admin.value = current
+  }
+}
+
+onMounted(loadAdmin)
+
+watch(() => route.path, loadAdmin)
 
 const handleMenuClick = ({ key }) => { router.push(`/admin/${key}`) }
 
